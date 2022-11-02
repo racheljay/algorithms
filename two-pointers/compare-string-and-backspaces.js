@@ -5,9 +5,8 @@ const backspace_compare = function (str1, str2) {
     let firstHash = 0
     let secondHash = 0
 
-
     while (i > 0 && j > 0) {
-        if (str1[i] === str2[j] && firstHash === 0 && secondHash === 0) {
+        if (str1[i] === str2[j] && firstHash === 0 && secondHash === 0 && str1[i] !== "#") {
             i--
             j--
         } else if (str1[i] === "#") {
