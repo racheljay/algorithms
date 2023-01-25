@@ -1,3 +1,8 @@
+/*
+    Time Complexity: O(n) -> N is the length of the string and we travel it once
+    Space Complexity: O(n) -> most of the expression is nested in itself
+*/
+
 function calculator(expression) {
     let number = 0
     let signVal = 1
