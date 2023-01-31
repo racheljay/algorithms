@@ -1,49 +1,34 @@
 function minRemoveParentheses(s) {
     const parenStack = [];
+    let validString = s
 
     for (let i = 0; i < s.length; i++) {
         const char = s[i];
-
-        if (char === ")" || char === "(") {
-            if (parenStack.length === 0) {
-                parenStack.push([char, i]);
-            } else if (char === ")") {
-                if (parenStack[parenStack.length - 1][0] === "(") {
-                    parenStack.pop();
-                } else {
-                    parenStack.push([char, i]);
-                }
-            } else if (char === "(") {
-                parenStack.push([char, i])
-            }
+        if (
+            parenStack.length > 0 &&
+            parenStack[parenStack.length - 1][0] === "(" &&
+            char === ")"
+        ) {
+            parenStack.pop()
+        } else if (char === ")" || char === "(") {
+            parenStack.push([char, i])
         }
     }
 
     console.log(parenStack);
-    const legalChars = [];
-    
-    if (parenStack.length > 0) {
-        let j = 0;
-        let badIndex = 0
-        for (let i = 0; i < s.length; i++) {
-            const char = s[i];
-            
-            if (j < parenStack.length) {
-                badIndex = parenStack[j][1];
-            }
 
-            if (i === badIndex) {
-                j++
-            } else {
-                legalChars.push(char);
-            }
-        }
-        console.log(legalChars.join(""));
-        return legalChars.join("");
-    } else {
-        console.log({s})
-        return s;
+    while (parenStack.length > 0) {
+        let popped = parenStack.pop()
+        console.log(popped)
+        let badIndex = popped[1]
+
+        validString =
+            validString.slice(0, badIndex) +
+            validString.slice(badIndex + 1, validString.length);
     }
+    console.log(validString)
+    return validString
+
 
 }
 
@@ -54,4 +39,4 @@ const case4 = ")("
 const case5 = "ab)ca(so)(sc(s)("
 const case6 = ")((xyz)())"
 
-minRemoveParentheses(case6)
+minRemoveParentheses(case2)
