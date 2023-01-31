@@ -21,20 +21,29 @@ function minRemoveParentheses(s) {
 
     console.log(parenStack);
     const legalChars = [];
-    let j = 0;
+    
+    if (parenStack.length > 0) {
+        let j = 0;
+        let badIndex = 0
+        for (let i = 0; i < s.length; i++) {
+            const char = s[i];
+            
+            if (j < parenStack.length) {
+                badIndex = parenStack[j][1];
+            }
 
-    for (let i = 0; i < s.length; i++) {
-        const char = s[i];
-        let badIndex = parenStack[j][1];
-
-        if (i === badIndex) {
-            j++
-        } else {
-            legalChars.push(char);
+            if (i === badIndex) {
+                j++
+            } else {
+                legalChars.push(char);
+            }
         }
+        console.log(legalChars.join(""));
+        return legalChars.join("");
+    } else {
+        console.log({s})
+        return s;
     }
-    // console.log(legalChars.join(""));
-    return legalChars.join("");
 
 }
 
@@ -43,5 +52,6 @@ const case2 = "("
 const case3 = ")"
 const case4 = ")("
 const case5 = "ab)ca(so)(sc(s)("
+const case6 = ")((xyz)())"
 
-minRemoveParentheses(case5)
+minRemoveParentheses(case6)
